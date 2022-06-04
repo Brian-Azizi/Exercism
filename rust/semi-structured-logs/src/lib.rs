@@ -2,23 +2,36 @@
 // to enable stricter warnings.
 #![allow(unused)]
 
+use std::fmt::format;
+
 /// various log levels
 #[derive(Clone, PartialEq, Debug)]
 pub enum LogLevel {
+    Debug,
     Info,
     Warning,
     Error,
 }
 /// primary function for emitting logs
 pub fn log(level: LogLevel, message: &str) -> String {
-    unimplemented!()
+    return format!("[{}]: {}", get_log_level_labell(level), message);
 }
 pub fn info(message: &str) -> String {
-    unimplemented!()
+    return log(LogLevel::Info, message);
 }
 pub fn warn(message: &str) -> String {
-    unimplemented!()
+    return log(LogLevel::Warning, message);
 }
 pub fn error(message: &str) -> String {
-    unimplemented!()
+    return log(LogLevel::Error, message);
+}
+
+fn get_log_level_labell(level: LogLevel) -> String {
+    match level {
+        LogLevel::Debug => "DEBUG",
+        LogLevel::Info => "INFO",
+        LogLevel::Warning => "WARNING",
+        LogLevel::Error => "ERROR",
+    }
+    .to_string()
 }
