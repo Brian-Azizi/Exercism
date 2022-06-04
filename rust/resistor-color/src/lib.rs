@@ -30,16 +30,11 @@ pub fn value_to_color_string(value: usize) -> String {
 }
 
 pub fn colors() -> Vec<ResistorColor> {
-    let mut colors: Vec<u8> = ResistorColor::into_enum_iter()
-        .map(|c| c.int_value())
+    let mut colors: Vec<(ResistorColor, u8)> = ResistorColor::into_enum_iter()
+        .map(|c| (c, c.int_value()))
         .collect();
-    colors.sort();
-    return colors
-        .iter()
-        .map(|value| ResistorColor::from_int(*value))
-        .map(|value| match value {
-            Ok(color) => color,
-            Err(_) => panic!("s"),
-        })
-        .collect();
+
+    colors.sort_by(|a, b| a.1.cmp(&b.1));
+
+    return colors.iter().map(|c| c.0).collect();
 }
