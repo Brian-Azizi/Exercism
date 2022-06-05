@@ -1,3 +1,5 @@
+use unicode_segmentation::UnicodeSegmentation;
+
 pub fn reverse(input: &str) -> String {
-    return input.split_inclusive("").rev().collect();
+    return input.graphemes(true).rev().collect();
 }
