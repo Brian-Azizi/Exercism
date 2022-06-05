@@ -7,16 +7,15 @@ pub struct Clock {
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         let (hour, minute) = unwind_clock(hours, minutes);
-
         Clock { hour, minute }
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
-        unimplemented!("Add {} minutes to existing Clock time", minutes);
+        Clock::new(self.hour, self.minute + minutes)
     }
 
     pub fn to_string(&self) -> String {
-        return format!("{:0>2}:{:0>2}", self.hour, self.minute);
+        format!("{:0>2}:{:0>2}", self.hour, self.minute)
     }
 }
 
