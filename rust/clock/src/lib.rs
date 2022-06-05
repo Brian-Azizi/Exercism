@@ -1,3 +1,5 @@
+use std::fmt::{Display, Formatter};
+
 #[derive(Debug, PartialEq)]
 pub struct Clock {
     hour: i32,
@@ -13,9 +15,11 @@ impl Clock {
     pub fn add_minutes(&self, minutes: i32) -> Self {
         Clock::new(self.hour, self.minute + minutes)
     }
+}
 
-    pub fn to_string(&self) -> String {
-        format!("{:0>2}:{:0>2}", self.hour, self.minute)
+impl Display for Clock {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
+        write!(f, "{:0>2}:{:0>2}", self.hour, self.minute)
     }
 }
 
